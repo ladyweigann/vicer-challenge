@@ -57,6 +57,7 @@ public interface TaskApi {
                             })
             }
     )
+    @PostMapping
     ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDTO);
 
     @Operation(
@@ -92,4 +93,18 @@ public interface TaskApi {
     )
     @PatchMapping("/{id}/complete-task")
     ResponseEntity<Void> completeTask(@PathVariable(value = "id") Long id);
+
+    @Operation(
+            summary = "Delete a task by its id",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "No Content",
+                            content = {
+                                    @Content(mediaType = APPLICATION_JSON_VALUE)
+                            })
+            }
+    )
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteTask(@PathVariable(value = "id") Long id);
 }

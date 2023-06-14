@@ -58,4 +58,10 @@ public class TaskController implements TaskApi {
         taskService.completeExistingTask(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<Void> deleteTask(Long id) {
+        taskService.deleteExistingTask(id);
+        return ResponseEntity.noContent().build();
+    }
 }

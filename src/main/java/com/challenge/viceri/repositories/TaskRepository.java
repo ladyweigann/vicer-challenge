@@ -129,4 +129,19 @@ public class TaskRepository {
         }
     }
 
+    public void deleteTask(Long taskId) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection
+                     .prepareStatement("DELETE FROM tasks WHERE id = ?")) {
+
+            statement.setLong(1, taskId);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

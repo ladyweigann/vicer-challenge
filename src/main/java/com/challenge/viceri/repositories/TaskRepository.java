@@ -21,12 +21,19 @@ public class TaskRepository {
         this.dataSource = dataSource;
     }
 
-    public List<Task> getAllTasks() {
+    public List<Task> getAllPendingTasks(Integer priorityParam) {
         List<Task> tasks = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            String sql = "SELECT * FROM tasks";
+            StringBuilder sqlBuilder = new StringBuilder();
+            sqlBuilder.append("SELECT * FROM tasks t WHERE t.status = 1");
+
+            if (priorityParam != null) {
+                sqlBuilder.append(" AND t.priority = ").append(priorityParam);
+            }
+
+            String sql = sqlBuilder.toString();
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {

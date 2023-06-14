@@ -14,8 +14,8 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllTasks() {
-        return taskRepository.getAllTasks();
+    public List<Task> getAllPendingTasks(Integer priorityParam) {
+        return taskRepository.getAllPendingTasks(priorityParam);
     }
 
 }

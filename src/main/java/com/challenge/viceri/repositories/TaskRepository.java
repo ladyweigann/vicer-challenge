@@ -78,4 +78,42 @@ public class TaskRepository {
 
         return task;
     }
+
+    public Task updateTask(Long taskId, String updatedDescription, Integer updatedPriority) {
+
+        Task task = null;
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET description = ?, priority = ? WHERE id = ?")) {
+
+            statement.setString(1, updatedDescription);
+            statement.setInt(2, updatedPriority);
+            statement.setLong(3, taskId);
+
+
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM tasks t WHERE t.id = ?");
+                    statement2.setLong(1, taskId);
+                    ResultSet resultSet = statement2.executeQuery();
+
+                    Long id = resultSet.getLong("id");
+                    String description = resultSet.getString("description");
+                    Integer priority = resultSet.getInt("priority");
+                    Integer status = resultSet.getInt("status");
+                    task = new Task(id, description, Priority.fromValue(priority), Status.fromValue(status));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return task;
+    }
+
+
 }

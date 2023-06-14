@@ -1,6 +1,6 @@
 package com.challenge.viceri.api;
 
-import com.challenge.viceri.entities.CreateTaskDTO;
+import com.challenge.viceri.entities.TaskDTO;
 import com.challenge.viceri.entities.Task;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -57,7 +57,25 @@ public interface TaskApi {
                             })
             }
     )
-    @PostMapping
-    ResponseEntity<Task> createTask(@RequestBody CreateTaskDTO taskDTO);
+    ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDTO);
 
+    @Operation(
+            summary = "Update an existing task description and priority by its id",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Success",
+                            content = {
+                                    @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = Task.class))
+                            }),
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "No Content",
+                            content = {
+                                    @Content(mediaType = APPLICATION_JSON_VALUE)
+                            })
+            }
+    )
+    @PutMapping("/{id}")
+    ResponseEntity<Task> updateTask(@PathVariable(value = "id") Long id, @RequestBody TaskDTO taskDTO);
 }

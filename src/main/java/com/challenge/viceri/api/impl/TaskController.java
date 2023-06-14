@@ -1,7 +1,7 @@
 package com.challenge.viceri.api.impl;
 
 import com.challenge.viceri.api.TaskApi;
-import com.challenge.viceri.entities.CreateTaskDTO;
+import com.challenge.viceri.entities.TaskDTO;
 import com.challenge.viceri.entities.Task;
 import com.challenge.viceri.services.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class TaskController implements TaskApi {
     }
 
     @Override
-    public ResponseEntity<Task> createTask(CreateTaskDTO taskDTO) {
+    public ResponseEntity<Task> createTask(TaskDTO taskDTO) {
         Task newTask = taskService.createNewTask(taskDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -41,4 +41,15 @@ public class TaskController implements TaskApi {
         return ResponseEntity.created(uri).body(newTask);
     }
 
+    @Override
+    public ResponseEntity<Task> updateTask(Long id, TaskDTO taskDTO) {
+        Task updatedTask = taskService.updateExistingTask(id, taskDTO);
+
+        if(updatedTask != null) {
+            return ResponseEntity.ok(updatedTask);
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
 }

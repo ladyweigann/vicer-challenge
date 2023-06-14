@@ -6,10 +6,7 @@ import com.challenge.viceri.entities.Task;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,4 +49,33 @@ public class TaskRepository {
         return tasks;
     }
 
+    public Task createTask(String descriptionRequest, Integer priorityRequest) {
+
+        Task task = null;
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "INSERT INTO tasks(description, priority, status) VALUES (?, ?, 1)",
+                     Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setObject(1, descriptionRequest);
+            statement.setObject(2, priorityRequest);
+
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    Long id = generatedKeys.getLong(1);
+                    Integer status = 1;
+                    task = new Task(id, descriptionRequest, Priority.fromValue(priorityRequest), Status.fromValue(status));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return task;
+    }
 }

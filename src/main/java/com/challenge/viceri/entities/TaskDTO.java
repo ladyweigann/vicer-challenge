@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTaskDTO {
+public class TaskDTO {
     private String description;
     private String priority;
 }

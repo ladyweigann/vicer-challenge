@@ -78,4 +78,18 @@ public interface TaskApi {
     )
     @PutMapping("/{id}")
     ResponseEntity<Task> updateTask(@PathVariable(value = "id") Long id, @RequestBody TaskDTO taskDTO);
+
+    @Operation(
+            summary = "Complete a task by its id",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "No Content",
+                            content = {
+                                    @Content(mediaType = APPLICATION_JSON_VALUE)
+                            })
+            }
+    )
+    @PatchMapping("/{id}/complete-task")
+    ResponseEntity<Void> completeTask(@PathVariable(value = "id") Long id);
 }

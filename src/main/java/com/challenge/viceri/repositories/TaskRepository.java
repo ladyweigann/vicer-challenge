@@ -115,5 +115,18 @@ public class TaskRepository {
         return task;
     }
 
+    public void completeTask(Long taskId) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET status = 2 WHERE id = ?")) {
+
+            statement.setLong(1, taskId);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

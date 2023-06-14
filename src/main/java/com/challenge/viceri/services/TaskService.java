@@ -32,4 +32,8 @@ public class TaskService {
         return taskRepository.updateTask(id, taskDTO.getDescription(), priority.getValue());
     }
 
+    public void completeExistingTask(Long id) {
+        taskRepository.completeTask(id);
+    }
+
 }

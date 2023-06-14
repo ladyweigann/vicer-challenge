@@ -52,4 +52,10 @@ public class TaskController implements TaskApi {
         return ResponseEntity.notFound().build();
 
     }
+
+    @Override
+    public ResponseEntity<Void> completeTask(Long id) {
+        taskService.completeExistingTask(id);
+        return ResponseEntity.noContent().build();
+    }
 }

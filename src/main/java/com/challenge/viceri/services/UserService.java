@@ -32,6 +32,6 @@ public class UserService {
     public boolean existentUser(UserLoginDTO loginDTO) {
         User user = userRepository.existsByEmail(loginDTO.email());
 
-        return user != null && user.password().equals(loginDTO.password());
+        return user != null && user.getPassword().equals(loginDTO.password());
     }
 }

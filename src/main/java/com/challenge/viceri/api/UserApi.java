@@ -75,5 +75,5 @@ public interface UserApi {
             }
     )
     @PostMapping("/login")
-    ResponseEntity<UserResponseDTO> login(@RequestBody UserLoginDTO loginDTO);
+    String login(@RequestBody UserLoginDTO loginDTO);
 }

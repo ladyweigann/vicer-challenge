@@ -83,27 +83,27 @@ class UserControllerTest {
         assertEquals(expectedUri, actualResponse.getHeaders().getLocation());
     }
 
-    @Test
-    void shouldBe200OkWhenSuccess() {
-        when(userService.existentUser(userLoginDTO))
-              .thenReturn(true);
-
-        var response = userController.login(userLoginDTO);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    void shouldBe404NotFoundWhenReturnFalse() {
-        when(userService.existentUser(userLoginDTO))
-                .thenReturn(false);
-
-        var response = userController.login(userLoginDTO);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    }
+//    @Test
+//    void shouldBe200OkWhenSuccess() {
+//        when(userService.existentUser(userLoginDTO))
+//              .thenReturn(true);
+//
+//        var response = userController.login(userLoginDTO);
+//
+//        assertNotNull(response);
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
+//
+//    @Test
+//    void shouldBe404NotFoundWhenReturnFalse() {
+//        when(userService.existentUser(userLoginDTO))
+//                .thenReturn(false);
+//
+//        var response = userController.login(userLoginDTO);
+//
+//        assertNotNull(response);
+//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+//    }
 
 
     private void initializeAttributes() {

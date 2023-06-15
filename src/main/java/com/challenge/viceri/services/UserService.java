@@ -34,6 +34,4 @@ public class UserService {
 
         return user != null && user.password().equals(loginDTO.password());
     }
-
-
 }

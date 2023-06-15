@@ -48,7 +48,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void createNewTask() {
+    void shouldCreateNewTaskWhenSuccess() {
         when(taskRepository.createTask(any(), any()))
                 .thenReturn(pendingTask);
 
@@ -59,7 +59,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void updateExistingTask() {
+    void shouldupdateExistingTaskWhenSuccess() {
         when(taskRepository.updateTask(any(), any(), any()))
                 .thenReturn(pendingTask);
 
@@ -72,7 +72,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void completeExistingTask() {
+    void shouldCompleteExistingTaskWhenSuccess() {
         service.completeExistingTask(1L);
 
         verify(taskRepository, times(1))
@@ -80,7 +80,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void deleteExistingTask() {
+    void shouldDeleteExistingTaskWhenSuccess() {
         service.deleteExistingTask(1L);
 
         verify(taskRepository, times(1)).deleteTask(1L);

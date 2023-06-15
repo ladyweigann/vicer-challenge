@@ -21,15 +21,15 @@ public class TaskService {
     }
 
     public Task createNewTask(TaskDTO taskDTO) {
-        Priority priority = Priority.fromValue(Priority.getPriority(taskDTO.getPriority()));
+        Priority priority = Priority.fromValue(Priority.getPriority(taskDTO.priority()));
 
-        return taskRepository.createTask(taskDTO.getDescription(), priority.getValue());
+        return taskRepository.createTask(taskDTO.description(), priority.getValue());
     }
 
     public Task updateExistingTask(Long id, TaskDTO taskDTO) {
-        Priority priority = Priority.fromValue(Priority.getPriority(taskDTO.getPriority()));
+        Priority priority = Priority.fromValue(Priority.getPriority(taskDTO.priority()));
 
-        return taskRepository.updateTask(id, taskDTO.getDescription(), priority.getValue());
+        return taskRepository.updateTask(id, taskDTO.description(), priority.getValue());
     }
 
     public void completeExistingTask(Long id) {

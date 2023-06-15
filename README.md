@@ -27,3 +27,21 @@ The objective of this challenge is to create a REST API for a task management ap
 - Now, you can access the Swagger Documentation [here](http://localhost:8080/swagger-ui/index.html#/)
 - In the link above, you can see all endpoints, API responses, etc.
 - You can use Postman or Insomnia to test this application.
+
+## Endpoints
+#### Tasks
+- [GET] http://localhost:8080/tasks 
+- [POST] http://localhost:8080/tasks
+  -- Body (Json):  
+{
+	"description": "new task",
+	"priority": "média"
+}
+- [PUT] http://localhost:8080/tasks/{id}
+  -- Body (Json):  
+{
+	"description": "new task",
+	"priority": "média"
+}
+- [PATCH] http://localhost:8080/tasks/{id}/complete-task
+- [DELETE] http://localhost:8080/tasks/{id}

@@ -1,5 +1,10 @@
-# vicer-challenge
+# viceri-challenge
+
+## Important!
+This project is not completely filling all requirements that were proposed.
+Due so many deprecated things to configure the Spring Security, I was not able to finish yet.
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
 ## Proposal
 The objective of this challenge is to create a REST API for a task management application (TO-DO). 
 ## Requirements
@@ -30,18 +35,35 @@ The objective of this challenge is to create a REST API for a task management ap
 
 ## Endpoints
 #### Tasks
-- [GET] http://localhost:8080/tasks 
-- [POST] http://localhost:8080/tasks
-  -- Body (Json):  
-{
-	"description": "new task",
-	"priority": "média"
-}
-- [PUT] http://localhost:8080/tasks/{id}
-  -- Body (Json):  
-{
-	"description": "new task",
-	"priority": "média"
-}
-- [PATCH] http://localhost:8080/tasks/{id}/complete-task
-- [DELETE] http://localhost:8080/tasks/{id}
+- [GET] http://localhost:8080/tasks - Get all tasks with pending status
+- [POST] http://localhost:8080/tasks - create a new task with status already set as pending. Request Body:
+  ```` Body (Json):  
+  {
+    "description": String,
+    "priority": String
+  }
+- [PUT] http://localhost:8080/tasks/{id} - Edit a task - Request Body:
+  ```` Body (Json):  
+  {
+    "description": String,
+    "priority": String
+  }
+- [PATCH] http://localhost:8080/tasks/{id}/complete-task - Set a status as complete for the task that you've passed the id as path variable
+- [DELETE] http://localhost:8080/tasks/{id} - delete a task
+
+#### Users
+- [GET] http://localhost:8080/users - get all users
+- [POST] http://localhost:8080/users/register - register a new user
+  ```` Body (Json):  
+  {
+    "name": String,
+    "email": String,
+    "password": String
+  }
+
+- [POST] http://localhost:8080/users/login - login
+  ```` Body (Json):  
+  {
+     "email": String,
+     "password": String
+  }

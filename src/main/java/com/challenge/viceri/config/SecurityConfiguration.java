@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeHttpRequests ->
                         authorizeHttpRequests
-                                .requestMatchers("/users/**")
+                                .requestMatchers("/**")
                                 .permitAll()
                                 .anyRequest().authenticated()).build();
     }
